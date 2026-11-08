@@ -20,7 +20,9 @@ const ALLOWED_RE = /^[\p{L}\p{N}._-]+$/u;
 const rooms = new Map();
 let cachedLobbySnapshot = ['RO', []];
 
+// Render platformunun harici ağ isteklerini kabul etmesi için host alanını 0.0.0.0 olarak sabitledik
 const wss = new WebSocket.Server({
+  host: '0.0.0.0',
   port: PORT,
   perMessageDeflate: false,
 }, () => {
