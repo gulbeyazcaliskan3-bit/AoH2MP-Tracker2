@@ -243,6 +243,9 @@ wss.on('connection', ws => {
   const state = { room: null, player: null, countryID: null };
   ws.state = state;
 
+  // Oyun bağlandığı an ona beklediği selamlaşma onayını gönderiyoruz
+  ws.send("AOC2AUTH|OK|MAKESESSION");
+
   ws.isAlive = true;
   ws.on('pong', () => { ws.isAlive = true; });
 
