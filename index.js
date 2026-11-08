@@ -20,9 +20,7 @@ const ALLOWED_RE = /^[\p{L}\p{N}._-]+$/u;
 const rooms = new Map();
 let cachedLobbySnapshot = ['RO', []];
 
-// Render platformunun harici ağ isteklerini kabul etmesi için host alanını 0.0.0.0 olarak sabitledik
 const wss = new WebSocket.Server({
-  host: '0.0.0.0',
   port: PORT,
   perMessageDeflate: false,
 }, () => {
@@ -244,9 +242,6 @@ function broadcast(roomName, arr) {
 wss.on('connection', ws => {
   const state = { room: null, player: null, countryID: null };
   ws.state = state;
-
-  // Oyun bağlandığı an ona beklediği selamlaşma onayını gönderiyoruz
-  ws.send("AOC2AUTH|OK|MAKESESSION");
 
   ws.isAlive = true;
   ws.on('pong', () => { ws.isAlive = true; });
